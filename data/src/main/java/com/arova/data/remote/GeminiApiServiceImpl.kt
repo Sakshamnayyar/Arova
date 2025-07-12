@@ -1,11 +1,11 @@
 package com.arova.data.remote
 
-import com.arova.data.GeminiApiService
+import com.arova.data.LanguageModelApiService
 import javax.inject.Inject
 
 class GeminiApiServiceImpl @Inject constructor(
     private val service: GeminiService
-) : GeminiApiService {
+) : LanguageModelApiService {
     override suspend fun parseNaturalLanguage(query: String): List<String> {
         return service.parse(GeminiRequest(query)).items
     }
