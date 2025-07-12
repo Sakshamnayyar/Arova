@@ -21,4 +21,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "Arova"
 include(":app")
+include(":domain")
+include(":data")
  
