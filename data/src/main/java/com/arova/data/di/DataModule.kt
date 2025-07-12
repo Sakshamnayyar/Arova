@@ -5,6 +5,14 @@ import androidx.room.Room
 import com.arova.data.*
 import com.arova.data.local.AppDatabase
 import com.arova.data.local.RoomLocalMealDao
+import com.arova.data.remote.*
+import kotlinx.serialization.json.Json
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.create
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
+import okhttp3.MediaType.Companion.toMediaType
 import com.arova.domain.*
 import dagger.Binds
 import dagger.Module
@@ -26,21 +34,43 @@ interface DataModule {
     companion object {
         @Provides
         @Singleton
-        fun provideGeminiApiService(): GeminiApiService = object : GeminiApiService {
-            override fun parseNaturalLanguage(query: String): List<String> =
-                query.split(",").map { it.trim() }
-        }
+        fun provideJson(): Json = Json { ignoreUnknownKeys = true }
 
         @Provides
         @Singleton
-        fun provideFoodDatabaseApiService(): FoodDatabaseApiService =
-            object : FoodDatabaseApiService {
-                override fun getNutritionInfo(
-                    name: String,
-                    quantity: Double,
-                    unit: String
-                ): FoodItem = FoodItem(name, quantity, unit, 0, 0.0, 0.0, 0.0)
-            }
+        fun provideOkHttp(): OkHttpClient = OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BASIC })
+            .build()
+
+        @Provides
+        @Singleton
+        fun provideGeminiService(json: Json, client: OkHttpClient): GeminiService =
+            Retrofit.Builder()
+                .baseUrl("https://example.com/")
+                .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+                .client(client)
+                .build()
+                .create()
+
+        @Provides
+        @Singleton
+        fun provideFoodDatabaseService(json: Json, client: OkHttpClient): FoodDatabaseService =
+            Retrofit.Builder()
+                .baseUrl("https://example.com/")
+                .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
+                .client(client)
+                .build()
+                .create()
+
+        @Provides
+        @Singleton
+        fun provideGeminiApiService(service: GeminiService): GeminiApiService =
+            GeminiApiServiceImpl(service)
+
+        @Provides
+        @Singleton
+        fun provideFoodDatabaseApiService(service: FoodDatabaseService): FoodDatabaseApiService =
+            FoodDatabaseApiServiceImpl(service)
 
         @Provides
         @Singleton
