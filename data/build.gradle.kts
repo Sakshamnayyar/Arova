@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm")
+    alias(libs.plugins.kotlin.kapt)
 }
 
 java {
@@ -9,4 +10,7 @@ java {
 
 dependencies {
     implementation(project(":domain"))
+    implementation(libs.javax.inject)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 }

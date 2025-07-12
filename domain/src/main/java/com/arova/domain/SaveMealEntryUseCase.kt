@@ -1,6 +1,8 @@
 package com.arova.domain
 
-class SaveMealEntryUseCase(private val repository: MealRepository) {
+import javax.inject.Inject
+
+class SaveMealEntryUseCase @Inject constructor(private val repository: MealRepository) {
     suspend operator fun invoke(meal: MealEntry) {
         repository.saveMeal(meal)
     }
