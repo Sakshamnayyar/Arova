@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.arova.data.*
 import com.arova.data.local.AppDatabase
 import com.arova.data.local.RoomLocalMealDao
+import com.arova.data.local.RoomLocalUserProfileDao
 import com.arova.data.remote.*
 import kotlinx.serialization.json.Json
 import okhttp3.OkHttpClient
@@ -30,6 +31,9 @@ interface DataModule {
 
     @Binds
     fun bindMealRepository(impl: MealRepositoryImpl): MealRepository
+
+    @Binds
+    fun bindUserProfileRepository(impl: UserProfileRepositoryImpl): UserProfileRepository
 
     companion object {
         @Provides
@@ -75,10 +79,15 @@ interface DataModule {
         @Provides
         @Singleton
         fun provideDatabase(@ApplicationContext context: Context): AppDatabase =
-            Room.databaseBuilder(context, AppDatabase::class.java, "aro va.db").build()
+            Room.databaseBuilder(context, AppDatabase::class.java, "arova.db").build()
 
         @Provides
         @Singleton
         fun provideLocalMealDao(db: AppDatabase): LocalMealDao = RoomLocalMealDao(db.mealDao())
+
+        @Provides
+        @Singleton
+        fun provideLocalUserProfileDao(db: AppDatabase): LocalUserProfileDao =
+            RoomLocalUserProfileDao(db.userProfileDao())
     }
 }
