@@ -68,7 +68,7 @@ interface DataModule {
 
         @Provides
         @Singleton
-        fun provideGeminiApiService(service: GeminiService): GeminiApiService =
+        fun provideLanguageModelApiService(service: GeminiService): LanguageModelApiService =
             GeminiApiServiceImpl(service)
 
         @Provides
