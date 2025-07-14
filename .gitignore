@@ -1,15 +1,27 @@
+# Gradle
+.gradle/
+build/
+**/build/
+
+# IDE
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+
+# OS files
 .DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+Thumbs.db
+
+# Local config
 local.properties
+*.keystore
+
+# Kotlin annotation processors
+.kapt/
+.cxx/
+.externalNativeBuild/
+
+# Compose previews
+**/debugUnitTest/
+
+# Crashlytics/Firebase
+crashlytics-build.properties
