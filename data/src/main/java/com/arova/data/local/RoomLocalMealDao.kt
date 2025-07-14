@@ -26,4 +26,8 @@ class RoomLocalMealDao(private val dao: MealDao) : LocalMealDao {
         }
         dao.insertItems(items)
     }
+
+    override suspend fun getMealsForDate(start: Long, end: Long): List<MealEntryWithItems> {
+        return dao.getMealsForDate(start, end)
+    }
 }

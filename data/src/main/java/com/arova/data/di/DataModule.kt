@@ -35,6 +35,9 @@ interface DataModule {
     @Binds
     fun bindUserProfileRepository(impl: UserProfileRepositoryImpl): UserProfileRepository
 
+    @Binds
+    fun bindUserRepository(impl: InMemoryUserRepository): UserRepository
+
     companion object {
         @Provides
         @Singleton

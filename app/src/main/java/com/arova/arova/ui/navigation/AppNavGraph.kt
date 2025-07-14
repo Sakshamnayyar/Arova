@@ -50,10 +50,16 @@ fun AppNavGraph() {
             startDestination = BottomNavItem.Welcome.route,
             modifier = androidx.compose.ui.Modifier.padding(innerPadding)
         ) {
-            composable(BottomNavItem.Welcome.route) { WelcomeScreen() }
-            composable(BottomNavItem.SignUp.route) { SignUpScreen() }
+            composable(BottomNavItem.Welcome.route) {
+                WelcomeScreen(onSignUp = { navController.navigate(BottomNavItem.SignUp.route) })
+            }
+            composable(BottomNavItem.SignUp.route) {
+                SignUpScreen(onSignedUp = { navController.navigate(BottomNavItem.Dashboard.route) })
+            }
             composable(BottomNavItem.Dashboard.route) { DashboardScreen() }
-            composable(BottomNavItem.FoodLogging.route) { FoodLoggingScreen() }
+            composable(BottomNavItem.FoodLogging.route) {
+                FoodLoggingScreen(onSaved = { navController.navigate(BottomNavItem.Dashboard.route) })
+            }
         }
     }
 }
