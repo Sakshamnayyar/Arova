@@ -1,5 +1,6 @@
 package com.arova.data
 
+import com.arova.data.local.MealEntryWithItems
 import com.arova.domain.MealEntry
 
 interface LocalMealDao {
