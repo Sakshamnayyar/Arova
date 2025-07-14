@@ -11,4 +11,8 @@ interface MealDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertItems(items: List<FoodItemEntity>)
+
+    @androidx.room.Transaction
+    @androidx.room.Query("SELECT * FROM meal_entries WHERE date BETWEEN :start AND :end")
+    suspend fun getMealsForDate(start: Long, end: Long): List<MealEntryWithItems>
 }
