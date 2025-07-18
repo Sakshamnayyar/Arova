@@ -5,7 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.arova.arova.ui.navigation.AppNavGraph
+import com.arova.arova.ui.navigation.BottomNavItem
+import com.arova.arova.ui.signup.SignUpScreen
 import com.arova.arova.ui.theme.ArovaTheme
+import com.arova.arova.ui.welcome.WelcomeScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -15,6 +18,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ArovaTheme {
+//                SignUpScreen()
+//                WelcomeScreen()
                 AppNavGraph()
             }
         }

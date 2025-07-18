@@ -9,3 +9,10 @@ val Pink80 = Color(0xFFEFB8C8)
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
+
+val FormButtonBackground = Color(0xFFF2F0E9)
+val FormButtonText = Color.Black
+val FormErrorText = Color.Red
+val FormFieldBackground = Color(0xFFEDEDED)
+val FormPrimaryText = Color.Black
+val FormSecondaryText = Color.DarkGray

@@ -16,7 +16,8 @@ class SignUpViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase
 ) : ViewModel() {
 
-    val name = MutableStateFlow("")
+    val firstName = MutableStateFlow("")
+    val lastName = MutableStateFlow("")
     val email = MutableStateFlow("")
     val password = MutableStateFlow("")
     val confirmPassword = MutableStateFlow("")
@@ -28,7 +29,7 @@ class SignUpViewModel @Inject constructor(
     val signUpSuccess: SharedFlow<Unit> = _signUpSuccess
 
     fun onSignUpClicked() {
-        if (name.value.isBlank() || email.value.isBlank() ||
+        if (firstName.value.isBlank() || lastName.value.isBlank() || email.value.isBlank() ||
             password.value.isBlank() || confirmPassword.value.isBlank()
         ) {
             errorMessage.value = "All fields are required"
@@ -40,7 +41,7 @@ class SignUpViewModel @Inject constructor(
         }
         viewModelScope.launch {
             isLoading.value = true
-            val result = signUpUseCase(name.value, email.value, password.value)
+            val result = signUpUseCase(firstName.value, lastName = lastName.value,email.value, password.value)
             isLoading.value = false
             result.onSuccess {
                 _signUpSuccess.emit(Unit)

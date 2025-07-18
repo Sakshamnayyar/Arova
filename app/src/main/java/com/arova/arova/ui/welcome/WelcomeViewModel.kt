@@ -17,4 +17,9 @@ class WelcomeViewModel @Inject constructor() : ViewModel() {
     fun onSignUpClicked() {
         viewModelScope.launch { _navigateToSignUp.emit(Unit) }
     }
+
+    fun onSignInClicked() {
+        viewModelScope.launch { _navigateToSignUp.emit(Unit) }
+    }
+
 }

@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.arova.arova.ui.UserProfile.UserProfile
 import com.arova.arova.ui.dashboard.DashboardScreen
 import com.arova.arova.ui.foodlogging.FoodLoggingScreen
 import com.arova.arova.ui.signup.SignUpScreen
@@ -61,6 +62,9 @@ fun AppNavGraph() {
             composable(BottomNavItem.Dashboard.route) { DashboardScreen() }
             composable(BottomNavItem.FoodLogging.route) {
                 FoodLoggingScreen(onSaved = { navController.navigate(BottomNavItem.Dashboard.route) })
+            }
+            composable(BottomNavItem.UserProfile.route) {
+                UserProfile()
             }
         }
     }
